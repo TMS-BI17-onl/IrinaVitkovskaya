@@ -1,0 +1,19 @@
+Well done!
+
+2
+b)-0.5
+You don't have the parentheses in the WHERE clause. It gives you the incorrect result at all. OR condition messes up everything.
+Correct answer:
+...WHERE StandardPrice>10 
+		AND (Name LIKE '%X%'
+			OR 
+			Name LIKE 'N%')
+      
+c)
+It would be better to have in the select exactly the filed that was asked. My proposition for this task is DISTINCT name.
+
+3
+c)
+Don't use ORDER BY if it's not stated in the task.
+
+Mark: 10
