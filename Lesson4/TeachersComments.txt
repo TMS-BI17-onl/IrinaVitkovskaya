@@ -1,0 +1,11 @@
+I feel like I already said it couple of times, but here's once again :) If you want Russian symbols to be displayed correctly, save file in the txt.
+It can even be done directly in the management studio.
+
+4
+b) -0.25
+I don't see any code to add rows with 'CAN'.
+
+e)-0.75
+You didn't use window functions. It should be MAX(...) OVER (...), ETC. 
+
+Mark: 9
