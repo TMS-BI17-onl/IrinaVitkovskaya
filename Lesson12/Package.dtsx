@@ -1,0 +1,525 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="3/4/2023 11:15:52 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-6CMA153"
+  DTS:CreatorName="DESKTOP-6CMA153\Irina"
+  DTS:DTSID="{797A1113-B733-4CC4-B2D8-C6A3FDF80EBD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3002.113"
+  DTS:LocaleID="8192"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{9AB0A9D1-881C-4EE7-960B-FF53311EA0F3}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-6CMA153\SQLEXPRESS.AdventureWorksDW2017]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{9912E993-BDD9-446D-AB4E-6BE2AD364F78}"
+      DTS:ObjectName="DESKTOP-6CMA153\SQLEXPRESS.AdventureWorksDW2017">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-6CMA153\SQLEXPRESS;Initial Catalog=AdventureWorksDW2017;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-6CMA153\SQLEXPRESS.TouristEquipmentRental]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1382BAE9-1413-4DF4-B77D-883AD1E1117A}"
+      DTS:ObjectName="DESKTOP-6CMA153\SQLEXPRESS.TouristEquipmentRental">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DESKTOP-6CMA153\SQLEXPRESS;Initial Catalog=TouristEquipmentRental;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Задача потока данных"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Задача потока данных"
+      DTS:DTSID="{A1F61FAD-8D74-4C67-9FBD-B0E57D533884}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Задача потока данных"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="Источник &quot;OLE DB&quot;;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;7"
+              description="Источник &quot;OLE DB&quot;"
+              name="Источник &quot;OLE DB&quot; из AdventureWorksDW2017"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Время ожидания команды, в секундах. Величина 0 означает неограниченное время ожидания."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowset">[dbo].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает переменную, содержащую имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Команда SQL для выполнения."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT DISTINCT TOP 10 CAST('Individual'as Varchar(50)) as Category, CONCAT(FirstName, ' ', LastName) as Name, 
+		CAST('-'as Varchar(36))  as RegistrationNumber, NEWID() as PassportNumber, 
+		CAST (RAND (CHECKSUM (NEWID ()))*10000000+1 AS INT) as PhoneNumber
+FROM [AdventureWorksDW2017].[dbo].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Переменная, содержащая команду SQL для выполнения."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Вызывает безусловное использование значение свойства DefaultCodePage при описании символьных данных."
+                  name="AlwaysUseDefaultCodePage">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает используемый режим доступа к базе данных."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="Сопоставления между параметрами в команде SQL и переменными."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6CMA153\SQLEXPRESS.AdventureWorksDW2017]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6CMA153\SQLEXPRESS.AdventureWorksDW2017]"
+                  description="Соединение OLE DB среды выполнения, используемое для доступа к базе данных."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;]"
+                  name="Выход источника &quot;OLE DB&quot;">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Category]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[Category]"
+                      length="50"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Category]"
+                      name="Category"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[Name]"
+                      length="101"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[RegistrationNumber]"
+                      codePage="1251"
+                      dataType="str"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[RegistrationNumber]"
+                      length="36"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[RegistrationNumber]"
+                      name="RegistrationNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      name="PassportNumber"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PhoneNumber]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Преобразование"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PhoneNumber]"
+                      name="PhoneNumber"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[Category]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="101"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[RegistrationNumber]"
+                      codePage="1251"
+                      dataType="str"
+                      length="36"
+                      name="RegistrationNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      dataType="guid"
+                      name="PassportNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].ExternalColumns[PhoneNumber]"
+                      dataType="i4"
+                      name="PhoneNumber" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;]"
+                  isErrorOut="true"
+                  name="Вывод ошибок источника &quot;OLE DB&quot;">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[Category]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[Category]"
+                      name="Category" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[Name]"
+                      dataType="wstr"
+                      length="101"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[RegistrationNumber]"
+                      codePage="1251"
+                      dataType="str"
+                      length="36"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[RegistrationNumber]"
+                      name="RegistrationNumber" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      dataType="guid"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      name="PassportNumber" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[PhoneNumber]"
+                      dataType="i4"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[PhoneNumber]"
+                      name="PhoneNumber" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Вывод ошибок источника &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="Назначение &quot;OLE DB&quot;;Корпорация Майкрософт. Microsoft SQL Server. (C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены. http://www.microsoft.com/sql/support;4"
+              description="Назначение &quot;OLE DB&quot;"
+              name="Назначение &quot;OLE DB&quot; в TouristEquipmentRental"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Время ожидания команды, в секундах. Величина 0 означает неограниченное время ожидания."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowset">[dbo].[DimCustomers]</property>
+                <property
+                  dataType="System.String"
+                  description="Указывает переменную, содержащую имя объекта базы данных, используемого для открытия набора строк."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="Команда SQL для выполнения."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает кодовую страницу столбца, используемую, когда недоступны сведения о кодовой странице из источника данных."
+                  name="DefaultCodePage">1251</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Вызывает безусловное использование значение свойства DefaultCodePage при описании символьных данных."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Указывает используемый режим доступа к базе данных."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Указывает, должны ли значения в столбцах идентификаторов копироваться в назначение. Если свойство имеет значение false, значения в столбцах идентификаторов будут созданы автоматически в месте назначения. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Указывает, будут ли в назначение вставляться значения NULL для столбцов, содержащих их. Значение false показывает, что если столбец имеет значение NULL, то в назначение будет вставлено его значение по умолчанию. Применяется только в случае, если включена быстрая загрузка."
+                  name="FastLoadKeepNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Задает параметры быстрой загрузки. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Задает, когда выдаются сообщения о фиксации транзакции в ходе вставки данных. Значение 0 задает, что по окончании вставки данных будет выдано одно сообщение о фиксации транзакции. Применяется только в том случае, если включена быстрая загрузка."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-6CMA153\SQLEXPRESS.TouristEquipmentRental]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-6CMA153\SQLEXPRESS.TouristEquipmentRental]"
+                  description="Соединение OLE DB среды выполнения, используемое для доступа к базе данных."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;]"
+                  errorOrTruncationOperation="Вставить"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Вход назначения &quot;OLE DB&quot;">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[Category]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="Category"
+                      externalMetadataColumnId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Category]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Category]" />
+                    <inputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="101"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Name]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[RegistrationNumber]"
+                      cachedCodepage="1251"
+                      cachedDataType="str"
+                      cachedLength="36"
+                      cachedName="RegistrationNumber"
+                      externalMetadataColumnId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[RegistrationNumber]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[RegistrationNumber]" />
+                    <inputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[PassportNumber]"
+                      cachedDataType="guid"
+                      cachedName="PassportNumber"
+                      externalMetadataColumnId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PassportNumber]" />
+                    <inputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].Columns[PhoneNumber]"
+                      cachedDataType="i4"
+                      cachedName="PhoneNumber"
+                      externalMetadataColumnId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PhoneNumber]"
+                      lineageId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;].Columns[PhoneNumber]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[CustomerID]"
+                      dataType="i4"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Category]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="Category" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="100"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[RegistrationNumber]"
+                      codePage="1251"
+                      dataType="str"
+                      length="36"
+                      name="RegistrationNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PassportNumber]"
+                      codePage="1251"
+                      dataType="str"
+                      length="36"
+                      name="PassportNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[PhoneNumber]"
+                      codePage="1251"
+                      dataType="str"
+                      length="10"
+                      name="PhoneNumber" />
+                    <externalMetadataColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;].ExternalColumns[Email]"
+                      codePage="1251"
+                      dataType="str"
+                      length="50"
+                      name="Email" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Вывод ошибок назначения &quot;OLE DB&quot;"
+                  synchronousInputId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Outputs[Вывод ошибок назначения &quot;OLE DB&quot;].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Задача потока данных.Paths[Выход источника &quot;OLE DB&quot;]"
+              endId="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental.Inputs[Вход назначения &quot;OLE DB&quot;]"
+              name="Выход источника &quot;OLE DB&quot;"
+              startId="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017.Outputs[Выход источника &quot;OLE DB&quot;]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--В данном разделе CDATA содержатся сведения о макете пакета. В данном разделе содержатся сведения о координатах (x,y), ширине и высоте.-->
+<!--В случае возникновения ошибки при редактировании этого раздела вручную его можно удалить. -->
+<!--Пакет можно загрузить обычным образом, но прежние сведения о макете будут утеряны, и конструктор автоматически перераспределит элементы в области конструктора.-->
+<Objects
+  Version="8">
+  <!--Все приведенные ниже узлы будут содержать свойства, не влияющие на поведение среды выполнения.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="190,42"
+          Id="Package\Задача потока данных"
+          TopLeft="222,119" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Задача потока данных">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="308,42"
+          Id="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017"
+          TopLeft="286,23" />
+        <NodeLayout
+          Size="310,42"
+          Id="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental"
+          TopLeft="286.428571428571,174.142857142857" />
+        <EdgeLayout
+          Id="Package\Задача потока данных.Paths[Выход источника &quot;OLE DB&quot;]"
+          TopLeft="440.714285714286,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,109.142857142857"
+              Start="0,0"
+              End="0,101.642857142857">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,101.642857142857" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Задача потока данных\Источник &quot;OLE DB&quot; из AdventureWorksDW2017">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Задача потока данных\Назначение &quot;OLE DB&quot; в TouristEquipmentRental">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
