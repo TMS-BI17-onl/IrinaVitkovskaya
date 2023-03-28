@@ -1,0 +1,10 @@
+Well done!
+
+-0.5
+No need in subqueries in tasks 3,4.
+
+5.
+-1
+We have whole job history table that we need to use. Each employee can work in multiple department during his career.
+
+Mark: 9
